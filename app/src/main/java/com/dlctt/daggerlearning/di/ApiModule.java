@@ -1,6 +1,7 @@
 package com.dlctt.daggerlearning.di;
 
-import com.dlctt.daggerlearning.BackendApi;
+import com.dlctt.daggerlearning.model.remote.LoginApi;
+import com.dlctt.daggerlearning.utils.Constants;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -16,7 +17,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
-public class RetrofitModule
+public class ApiModule
 {
     @Singleton
     @Provides
@@ -41,7 +42,7 @@ public class RetrofitModule
     public static Retrofit provideRetrofit(OkHttpClient client, Gson gson)
     {
         return new Retrofit.Builder().
-                baseUrl("https://www.google.com/").
+                baseUrl(Constants.BASE_URL).
                 addConverterFactory(GsonConverterFactory.create(gson)).
                 addCallAdapterFactory(RxJava2CallAdapterFactory.create()).
                 client(client).
@@ -50,9 +51,8 @@ public class RetrofitModule
 
     @Singleton
     @Provides
-    public static BackendApi provideBackendApi(Retrofit retrofit)
+    public static LoginApi provideLoginApi(Retrofit retrofit)
     {
-        return retrofit.create(BackendApi.class);
+        return retrofit.create(LoginApi.class);
     }
-
 }
