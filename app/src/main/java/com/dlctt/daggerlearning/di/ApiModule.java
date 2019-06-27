@@ -1,6 +1,5 @@
 package com.dlctt.daggerlearning.di;
 
-import com.dlctt.daggerlearning.model.remote.LoginApi;
 import com.dlctt.daggerlearning.utils.Constants;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -49,10 +48,11 @@ public class ApiModule
                 build();
     }
 
-    @Singleton
-    @Provides
-    public static LoginApi provideLoginApi(Retrofit retrofit)
-    {
-        return retrofit.create(LoginApi.class);
-    }
+//    @Singleton
+//    @Provides
+//    public static UsersApi provideUsersApi(Retrofit retrofit)
+//    {
+//        return retrofit.create(UsersApi.class);
+//    }
+
 }

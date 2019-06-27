@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.dlctt.daggerlearning" >
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.dlctt.daggerlearning">
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".DaggerLearningApp"
@@ -9,8 +12,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
-        <activity android:name=".login.LoginActivity" >
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".profile.ProfileActivity" />
+        <activity android:name=".login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
