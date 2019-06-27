@@ -1,6 +1,6 @@
 package com.dlctt.daggerlearning.di;
 
-import com.dlctt.daggerlearning.login.LoginActivity;
+import com.dlctt.daggerlearning.login.LoginContract;
 import com.dlctt.daggerlearning.login.LoginPresenter;
 import com.dlctt.daggerlearning.model.remote.LoginApi;
 import com.dlctt.daggerlearning.model.remote.LoginRepository;
@@ -14,16 +14,9 @@ public class LoginModule
 {
     @Provides
     @ActivityScoped
-    public static LoginPresenter provideLoginPresenter(LoginActivity loginActivity, LoginRepository loginRepository)
+    public static LoginPresenter provideLoginPresenter(LoginContract.View view, LoginRepository loginRepository)
     {
-        return new LoginPresenter(loginActivity, loginRepository);
-    }
-
-    @Provides
-    @ActivityScoped
-    public static LoginActivity provideLoginActivity(LoginActivity loginActivity)
-    {
-        return loginActivity;
+        return new LoginPresenter(view, loginRepository);
     }
 
     @Provides

@@ -22,7 +22,7 @@ public class LoginActivity extends DaggerAppCompatActivity implements LoginContr
     private EditText idInput;
     private Button loginBtn;
 
-    @Inject
+//    @Inject
     private LoginPresenter presenter;
 
     private ProgressBar loadingIndicator;
