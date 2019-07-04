@@ -6,12 +6,13 @@ import com.dlctt.daggerlearning.login.LoginPresenter;
 import com.dlctt.daggerlearning.model.remote.LoginApi;
 import com.dlctt.daggerlearning.model.remote.LoginRepository;
 
+import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
 import retrofit2.Retrofit;
 
 @Module
-public class LoginModule
+public abstract class LoginModule
 {
     @Provides
     @ActivityScoped
@@ -33,4 +34,8 @@ public class LoginModule
     {
         return retrofit.create(LoginApi.class);
     }
+
+    @Binds
+    @ActivityScoped
+    abstract LoginContract.View provideLoginView(LoginActivity loginActivity);
 }
