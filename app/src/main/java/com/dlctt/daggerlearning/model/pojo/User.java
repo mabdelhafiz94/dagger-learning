@@ -1,5 +1,7 @@
 package com.dlctt.daggerlearning.model.pojo;
 
+import androidx.annotation.NonNull;
+
 public class User
 {
     private int id;
@@ -45,5 +47,17 @@ public class User
     public void setEmail(String email)
     {
         this.email = email;
+    }
+
+    @NonNull
+    @Override
+    public String toString()
+    {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }

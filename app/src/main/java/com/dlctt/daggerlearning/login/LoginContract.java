@@ -7,7 +7,7 @@ public interface LoginContract
 {
     interface View extends BaseView
     {
-        void onLoginSuccess();
+        void onLoginSuccess(int userId);
 
         void onLoginFail();
     }
