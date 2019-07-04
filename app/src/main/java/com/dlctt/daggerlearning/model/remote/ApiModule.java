@@ -20,14 +20,14 @@ public class ApiModule
 {
     @Singleton
     @Provides
-    public static Gson provideGson()
+    static Gson provideGson()
     {
         return new GsonBuilder().create();
     }
 
     @Singleton
     @Provides
-    public static OkHttpClient provideOkHttpClient()
+    static OkHttpClient provideOkHttpClient()
     {
         return new OkHttpClient.Builder().
                 readTimeout(1, TimeUnit.MINUTES).
@@ -38,7 +38,7 @@ public class ApiModule
 
     @Singleton
     @Provides
-    public static Retrofit provideRetrofit(OkHttpClient client, Gson gson)
+    static Retrofit provideRetrofit(OkHttpClient client, Gson gson)
     {
         return new Retrofit.Builder().
                 baseUrl(Constants.BASE_URL).
@@ -47,12 +47,4 @@ public class ApiModule
                 client(client).
                 build();
     }
-
-//    @Singleton
-//    @Provides
-//    public static UsersApi provideUsersApi(Retrofit retrofit)
-//    {
-//        return retrofit.create(UsersApi.class);
-//    }
-
 }

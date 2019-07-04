@@ -1,10 +1,8 @@
-package com.dlctt.daggerlearning.login;
+package com.dlctt.daggerlearning.profile;
 
 import com.dlctt.daggerlearning.di.ActivityScoped;
 import com.dlctt.daggerlearning.model.pojo.User;
-import com.dlctt.daggerlearning.model.remote.LoginRepository;
-
-import java.util.List;
+import com.dlctt.daggerlearning.model.remote.UsersRepository;
 
 import javax.inject.Inject;
 
@@ -14,26 +12,26 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 @ActivityScoped
-public class LoginPresenter implements LoginContract.Presenter
+public class ProfilePresenter implements ProfileContract.Presenter
 {
-    private LoginRepository loginRepository;
-    private LoginContract.View view;
+    private UsersRepository usersRepository;
+    private ProfileContract.View view;
 
     @Inject
-    LoginPresenter(LoginContract.View view, LoginRepository loginRepository)
+    ProfilePresenter(ProfileContract.View view, UsersRepository usersRepository)
     {
         this.view = view;
-        this.loginRepository = loginRepository;
+        this.usersRepository = usersRepository;
     }
 
     @Override
-    public void login(final int userId)
+    public void loadUserProfile(Integer userId)
     {
         view.showLoadingIndicator();
-        loginRepository.login().
+        usersRepository.getUserProfile(userId).
                 subscribeOn(Schedulers.io()).
                 observeOn(AndroidSchedulers.mainThread()).
-                subscribe(new Observer<List<User>>()
+                subscribe(new Observer<User>()
                 {
                     @Override
                     public void onSubscribe(Disposable d)
@@ -42,20 +40,10 @@ public class LoginPresenter implements LoginContract.Presenter
                     }
 
                     @Override
-                    public void onNext(List<User> users)
+                    public void onNext(User user)
                     {
-                        for (User user : users)
-                        {
-                            if (user.getId() == userId)
-                            {
-                                view.hideLoadingIndicator();
-                                view.onLoginSuccess(userId);
-                                return;
-                            }
-                        }
-
                         view.hideLoadingIndicator();
-                        view.onLoginFail();
+                        view.onProfileLoaded(user);
                     }
 
                     @Override
