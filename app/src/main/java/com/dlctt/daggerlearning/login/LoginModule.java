@@ -1,5 +1,6 @@
-package com.dlctt.daggerlearning.di;
+package com.dlctt.daggerlearning.login;
 
+import com.dlctt.daggerlearning.di.ActivityScoped;
 import com.dlctt.daggerlearning.login.LoginContract;
 import com.dlctt.daggerlearning.login.LoginPresenter;
 import com.dlctt.daggerlearning.model.remote.LoginApi;

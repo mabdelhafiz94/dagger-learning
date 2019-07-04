@@ -1,4 +1,4 @@
-package com.dlctt.daggerlearning.di;
+package com.dlctt.daggerlearning.model.remote;
 
 import com.dlctt.daggerlearning.utils.Constants;
 import com.google.gson.Gson;

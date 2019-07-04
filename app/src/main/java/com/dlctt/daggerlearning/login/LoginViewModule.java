@@ -1,4 +1,4 @@
-package com.dlctt.daggerlearning.di;
+package com.dlctt.daggerlearning.login;
 
 import com.dlctt.daggerlearning.login.LoginActivity;
 import com.dlctt.daggerlearning.login.LoginContract;

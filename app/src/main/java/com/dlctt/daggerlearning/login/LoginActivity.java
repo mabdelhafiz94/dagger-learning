@@ -22,8 +22,8 @@ public class LoginActivity extends DaggerAppCompatActivity implements LoginContr
     private EditText idInput;
     private Button loginBtn;
 
-//    @Inject
-    private LoginPresenter presenter;
+    @Inject
+    LoginPresenter presenter;
 
     private ProgressBar loadingIndicator;
 
@@ -35,7 +35,6 @@ public class LoginActivity extends DaggerAppCompatActivity implements LoginContr
         setContentView(R.layout.activity_login);
         initView();
         prepViews();
-//        presenter = new LoginPresenter(this);
     }
 
     private void initView()

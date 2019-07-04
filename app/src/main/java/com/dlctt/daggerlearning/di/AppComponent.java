@@ -3,6 +3,7 @@ package com.dlctt.daggerlearning.di;
 import android.app.Application;
 
 import com.dlctt.daggerlearning.DaggerLearningApp;
+import com.dlctt.daggerlearning.model.remote.ApiModule;
 
 import javax.inject.Singleton;
 
@@ -12,7 +13,7 @@ import dagger.android.AndroidInjector;
 import dagger.android.support.AndroidSupportInjectionModule;
 
 @Singleton
-@Component(modules = {AndroidSupportInjectionModule.class, ActivityBuildersModule.class, AppModule.class, ApiModule.class})
+@Component(modules = {AndroidSupportInjectionModule.class, ActivityBindingModule.class, AppModule.class, ApiModule.class})
 public interface AppComponent extends AndroidInjector<DaggerLearningApp>
 {
     @Component.Builder
