@@ -26,7 +26,7 @@ public class LoginActivity extends DaggerAppCompatActivity implements LoginContr
     private Button loginBtn;
 
     @Inject
-    LoginPresenter presenter;
+    LoginContract.Presenter presenter;
 
     private ProgressBar loadingIndicator;
 

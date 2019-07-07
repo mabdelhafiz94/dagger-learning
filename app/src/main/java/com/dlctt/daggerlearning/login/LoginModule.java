@@ -14,7 +14,7 @@ public abstract class LoginModule
 {
     @Provides
     @ActivityScoped
-    static LoginPresenter provideLoginPresenter(LoginContract.View view, LoginRepository loginRepository)
+    static LoginContract.Presenter provideLoginPresenter(LoginContract.View view, LoginRepository loginRepository)
     {
         return new LoginPresenter(view, loginRepository);
     }

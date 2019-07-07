@@ -18,7 +18,7 @@ public class HomePresenter implements HomeContract.Presenter
     private UsersRepository usersRepository;
 
     @Inject
-    public HomePresenter(HomeContract.View view, UsersRepository usersRepository)
+    HomePresenter(HomeContract.View view, UsersRepository usersRepository)
     {
         this.view = view;
         this.usersRepository = usersRepository;

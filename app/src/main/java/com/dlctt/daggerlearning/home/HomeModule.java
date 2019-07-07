@@ -14,9 +14,9 @@ public abstract class HomeModule
 {
     @Provides
     @ActivityScoped
-    static UsersApi provideUsersApi(Retrofit retrofit)
+    static HomeContract.Presenter provideHomePresenter(HomeContract.View view, UsersRepository usersRepository)
     {
-        return retrofit.create(UsersApi.class);
+        return new HomePresenter(view, usersRepository);
     }
 
     @Provides
@@ -28,9 +28,9 @@ public abstract class HomeModule
 
     @Provides
     @ActivityScoped
-    static HomeContract.Presenter provideHomePresenter(HomeContract.View view, UsersRepository usersRepository)
+    static UsersApi provideUsersApi(Retrofit retrofit)
     {
-        return new HomePresenter(view, usersRepository);
+        return retrofit.create(UsersApi.class);
     }
 
     @Binds
