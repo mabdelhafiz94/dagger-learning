@@ -18,7 +18,7 @@ public class UsersRepository
         this.usersApi = usersApi;
     }
 
-    public Observable<User> getUserProfile(int userId)
+    public Observable<User> getUserById(Integer userId)
     {
         return usersApi.getUserById(userId);
     }
