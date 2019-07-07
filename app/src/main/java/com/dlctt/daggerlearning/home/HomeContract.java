@@ -1,19 +1,19 @@
-package com.dlctt.daggerlearning.profile;
+package com.dlctt.daggerlearning.home;
 
 import com.dlctt.daggerlearning.BasePresenter;
 import com.dlctt.daggerlearning.BaseView;
 import com.dlctt.daggerlearning.model.pojo.User;
 
-public interface ProfileContract
+public interface HomeContract
 {
     interface View extends BaseView
     {
-        void onProfileLoaded(User user);
+        void onUserInfoLoaded(User user);
     }
 
     interface Presenter extends BasePresenter
     {
-        void loadUserProfile(Integer userId);
+        void loadUserInfo(Integer userId);
     }
 
 }

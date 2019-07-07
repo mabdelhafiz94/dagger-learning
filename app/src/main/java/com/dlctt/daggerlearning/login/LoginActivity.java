@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.dlctt.daggerlearning.R;
 import com.dlctt.daggerlearning.di.ActivityScoped;
-import com.dlctt.daggerlearning.profile.ProfileActivity;
+import com.dlctt.daggerlearning.home.HomeActivity;
 import com.dlctt.daggerlearning.utils.Constants;
 
 import javax.inject.Inject;
@@ -63,7 +63,7 @@ public class LoginActivity extends DaggerAppCompatActivity implements LoginContr
     {
         Toast.makeText(this, "onLoginSuccess", Toast.LENGTH_SHORT).show();
 
-        Intent intent = new Intent(this, ProfileActivity.class);
+        Intent intent = new Intent(this, HomeActivity.class);
         intent.putExtra(Constants.USER_ID_KEY, userId);
         startActivity(intent);
     }

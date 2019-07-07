@@ -1,9 +1,10 @@
-package com.dlctt.daggerlearning.profile;
+package com.dlctt.daggerlearning.home;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dlctt.daggerlearning.R;
 import com.dlctt.daggerlearning.di.ActivityScoped;
@@ -15,23 +16,24 @@ import javax.inject.Inject;
 import dagger.android.support.DaggerAppCompatActivity;
 
 @ActivityScoped
-public class ProfileActivity extends DaggerAppCompatActivity implements ProfileContract.View
+public class HomeActivity extends DaggerAppCompatActivity implements HomeContract.View
 {
     private TextView userInfoText;
     private ProgressBar loadingIndicator;
 
     @Inject
-    ProfilePresenter profilePresenter;
+    HomeContract.Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_home);
         initView();
+
         int userId = getIntent().getIntExtra(Constants.USER_ID_KEY, 0);
 
-        profilePresenter.loadUserProfile(userId);
+        presenter.loadUserInfo(userId);
     }
 
     private void initView()
@@ -41,7 +43,7 @@ public class ProfileActivity extends DaggerAppCompatActivity implements ProfileC
     }
 
     @Override
-    public void onProfileLoaded(User user)
+    public void onUserInfoLoaded(User user)
     {
         userInfoText.setText(user.toString());
     }
@@ -61,6 +63,6 @@ public class ProfileActivity extends DaggerAppCompatActivity implements ProfileC
     @Override
     public void onInternetError()
     {
-
+        Toast.makeText(this, "onInternetError", Toast.LENGTH_SHORT).show();
     }
 }

@@ -1,4 +1,4 @@
-package com.dlctt.daggerlearning.profile;
+package com.dlctt.daggerlearning.home;
 
 import com.dlctt.daggerlearning.di.ActivityScoped;
 import com.dlctt.daggerlearning.model.pojo.User;
@@ -12,23 +12,24 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 @ActivityScoped
-public class ProfilePresenter implements ProfileContract.Presenter
+public class HomePresenter implements HomeContract.Presenter
 {
+    private HomeContract.View view;
     private UsersRepository usersRepository;
-    private ProfileContract.View view;
 
     @Inject
-    ProfilePresenter(ProfileContract.View view, UsersRepository usersRepository)
+    public HomePresenter(HomeContract.View view, UsersRepository usersRepository)
     {
         this.view = view;
         this.usersRepository = usersRepository;
     }
 
     @Override
-    public void loadUserProfile(Integer userId)
+    public void loadUserInfo(Integer userId)
     {
         view.showLoadingIndicator();
-        usersRepository.getUserProfile(userId).
+
+        usersRepository.getUserById(userId).
                 subscribeOn(Schedulers.io()).
                 observeOn(AndroidSchedulers.mainThread()).
                 subscribe(new Observer<User>()
@@ -43,7 +44,7 @@ public class ProfilePresenter implements ProfileContract.Presenter
                     public void onNext(User user)
                     {
                         view.hideLoadingIndicator();
-                        view.onProfileLoaded(user);
+                        view.onUserInfoLoaded(user);
                     }
 
                     @Override

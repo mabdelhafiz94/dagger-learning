@@ -1,9 +1,9 @@
 package com.dlctt.daggerlearning.di;
 
+import com.dlctt.daggerlearning.home.HomeActivity;
+import com.dlctt.daggerlearning.home.HomeModule;
 import com.dlctt.daggerlearning.login.LoginActivity;
 import com.dlctt.daggerlearning.login.LoginModule;
-import com.dlctt.daggerlearning.profile.ProfileActivity;
-import com.dlctt.daggerlearning.profile.ProfileModule;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -15,7 +15,7 @@ abstract class ActivityBindingModule
     @ActivityScoped
     abstract LoginActivity bindsLoginActivity();
 
-    @ContributesAndroidInjector(modules = {ProfileModule.class})
+    @ContributesAndroidInjector(modules = {HomeModule.class})
     @ActivityScoped
-    abstract ProfileActivity bindsProfileActivity();
+    abstract HomeActivity bindsHomeActivity();
 }
