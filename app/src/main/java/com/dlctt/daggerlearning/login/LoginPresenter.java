@@ -4,6 +4,7 @@ import com.dlctt.daggerlearning.di.ActivityScoped;
 import com.dlctt.daggerlearning.model.pojo.User;
 import com.dlctt.daggerlearning.model.remote.LoginRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -56,6 +57,43 @@ public class LoginPresenter implements LoginContract.Presenter
 
                         view.hideLoadingIndicator();
                         view.onLoginFail();
+                    }
+
+                    @Override
+                    public void onError(Throwable e)
+                    {
+                        view.hideLoadingIndicator();
+                        view.onInternetError();
+                    }
+
+                    @Override
+                    public void onComplete()
+                    {
+
+                    }
+                });
+    }
+
+    @Override
+    public void loadUsers()
+    {
+        view.showLoadingIndicator();
+        loginRepository.login().
+                subscribeOn(Schedulers.io()).
+                observeOn(AndroidSchedulers.mainThread()).
+                subscribe(new Observer<List<User>>()
+                {
+                    @Override
+                    public void onSubscribe(Disposable d)
+                    {
+
+                    }
+
+                    @Override
+                    public void onNext(List<User> users)
+                    {
+                        view.hideLoadingIndicator();
+                        view.onUsersLoaded(new ArrayList<>(users));
                     }
 
                     @Override

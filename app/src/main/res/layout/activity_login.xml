@@ -4,40 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingStart="30dp"
-    android:paddingTop="50dp"
-    android:paddingEnd="30dp"
+    android:padding="10dp"
     tools:context=".login.LoginActivity">
 
-
-    <ImageView
-        android:id="@+id/logo_img"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/id_input"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/users_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:hint="@string/id"
-        android:importantForAutofill="no"
-        android:inputType="number"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/logo_img" />
-
-    <Button
-        android:id="@+id/login_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="@string/login"
-        android:textAllCaps="false"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/id_input" />
+        android:layout_height="match_parent" />
 
     <ProgressBar
         android:id="@+id/loading_indicator"
