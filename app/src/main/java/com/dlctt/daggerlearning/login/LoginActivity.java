@@ -15,6 +15,7 @@ import com.dlctt.daggerlearning.di.ActivityScoped;
 import com.dlctt.daggerlearning.home.HomeActivity;
 import com.dlctt.daggerlearning.model.pojo.User;
 import com.dlctt.daggerlearning.utils.Constants;
+import com.dlctt.daggerlearning.utils.UsersDiffCallback;
 
 import java.util.ArrayList;
 
@@ -34,13 +35,12 @@ public class LoginActivity extends DaggerAppCompatActivity implements LoginContr
     private RecyclerView usersList;
     private UsersAdapter usersAdapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        usersAdapter = new UsersAdapter(new ArrayList<User>());
+        usersAdapter = new UsersAdapter(new UsersDiffCallback());
         initView();
         prepViews();
         presenter.loadUsers();
@@ -78,8 +78,7 @@ public class LoginActivity extends DaggerAppCompatActivity implements LoginContr
     @Override
     public void onUsersLoaded(ArrayList<User> users)
     {
-        usersAdapter.setData(users);
-        usersAdapter.notifyDataSetChanged();
+        usersAdapter.submitList(users);
     }
 
     @Override
