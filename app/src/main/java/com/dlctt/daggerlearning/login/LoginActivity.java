@@ -3,15 +3,20 @@ package com.dlctt.daggerlearning.login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.dlctt.daggerlearning.R;
 import com.dlctt.daggerlearning.di.ActivityScoped;
 import com.dlctt.daggerlearning.home.HomeActivity;
+import com.dlctt.daggerlearning.model.pojo.User;
 import com.dlctt.daggerlearning.utils.Constants;
+
+import java.util.ArrayList;
 
 import javax.inject.Inject;
 
@@ -22,13 +27,12 @@ public class LoginActivity extends DaggerAppCompatActivity implements LoginContr
 {
     private static final String TAG = "LoginActivity";
 
-    private EditText idInput;
-    private Button loginBtn;
-
     @Inject
     LoginContract.Presenter presenter;
 
     private ProgressBar loadingIndicator;
+    private RecyclerView usersList;
+    private UsersAdapter usersAdapter;
 
 
     @Override
@@ -36,26 +40,29 @@ public class LoginActivity extends DaggerAppCompatActivity implements LoginContr
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        usersAdapter = new UsersAdapter(new ArrayList<User>());
         initView();
         prepViews();
+        presenter.loadUsers();
     }
 
     private void initView()
     {
-        idInput = findViewById(R.id.id_input);
-        loginBtn = findViewById(R.id.login_btn);
         loadingIndicator = findViewById(R.id.loading_indicator);
+        usersList = findViewById(R.id.users_list);
     }
 
     private void prepViews()
     {
-        loginBtn.setOnClickListener(this);
+        usersList.setItemAnimator(new DefaultItemAnimator());
+        usersList.setLayoutManager(new LinearLayoutManager(this));
+        usersList.setAdapter(usersAdapter);
     }
 
     @Override
     public void onClick(View v)
     {
-        presenter.login(Integer.valueOf(idInput.getText().toString()));
+
     }
 
     @Override
@@ -66,6 +73,13 @@ public class LoginActivity extends DaggerAppCompatActivity implements LoginContr
         Intent intent = new Intent(this, HomeActivity.class);
         intent.putExtra(Constants.USER_ID_KEY, userId);
         startActivity(intent);
+    }
+
+    @Override
+    public void onUsersLoaded(ArrayList<User> users)
+    {
+        usersAdapter.setData(users);
+        usersAdapter.notifyDataSetChanged();
     }
 
     @Override
