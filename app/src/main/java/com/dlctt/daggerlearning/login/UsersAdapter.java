@@ -12,14 +12,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.dlctt.daggerlearning.R;
 import com.dlctt.daggerlearning.model.pojo.User;
+import com.dlctt.daggerlearning.utils.ListItemCallback;
 
 public class UsersAdapter extends ListAdapter<User, UsersAdapter.UserViewHolder>
 {
-    UsersAdapter(@NonNull DiffUtil.ItemCallback<User> diffCallback)
+    private final ListItemCallback<User> userListItemCallback;
+
+    UsersAdapter(@NonNull DiffUtil.ItemCallback<User> diffCallback, ListItemCallback<User> userListItemCallback)
     {
         super(diffCallback);
+        this.userListItemCallback = userListItemCallback;
     }
-
 
     @NonNull
     @Override
@@ -36,7 +39,7 @@ public class UsersAdapter extends ListAdapter<User, UsersAdapter.UserViewHolder>
         holder.bind(getItem(position));
     }
 
-    class UserViewHolder extends RecyclerView.ViewHolder
+    class UserViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
         TextView userInfoText;
 
@@ -44,11 +47,21 @@ public class UsersAdapter extends ListAdapter<User, UsersAdapter.UserViewHolder>
         {
             super(itemView);
             userInfoText = itemView.findViewById(R.id.user_info_text);
+            itemView.setOnClickListener(this);
         }
 
         void bind(User item)
         {
             userInfoText.setText(item.toString());
+        }
+
+        @Override
+        public void onClick(View v)
+        {
+            int adapterPosition = getAdapterPosition();
+            int layoutPosition = getLayoutPosition();
+            if (adapterPosition == layoutPosition)
+                userListItemCallback.onItemClicked(getItem(adapterPosition));
         }
     }
 }

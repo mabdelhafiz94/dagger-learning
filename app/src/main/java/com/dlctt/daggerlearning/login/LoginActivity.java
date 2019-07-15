@@ -15,6 +15,7 @@ import com.dlctt.daggerlearning.di.ActivityScoped;
 import com.dlctt.daggerlearning.home.HomeActivity;
 import com.dlctt.daggerlearning.model.pojo.User;
 import com.dlctt.daggerlearning.utils.Constants;
+import com.dlctt.daggerlearning.utils.ListItemCallback;
 import com.dlctt.daggerlearning.utils.UsersDiffCallback;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ import javax.inject.Inject;
 import dagger.android.support.DaggerAppCompatActivity;
 
 @ActivityScoped
-public class LoginActivity extends DaggerAppCompatActivity implements LoginContract.View, View.OnClickListener
+public class LoginActivity extends DaggerAppCompatActivity implements LoginContract.View, View.OnClickListener, ListItemCallback<User>
 {
     private static final String TAG = "LoginActivity";
 
@@ -40,7 +41,7 @@ public class LoginActivity extends DaggerAppCompatActivity implements LoginContr
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        usersAdapter = new UsersAdapter(new UsersDiffCallback());
+        usersAdapter = new UsersAdapter(new UsersDiffCallback(), this);
         initView();
         prepViews();
         presenter.loadUsers();
@@ -103,5 +104,11 @@ public class LoginActivity extends DaggerAppCompatActivity implements LoginContr
     public void onInternetError()
     {
         Toast.makeText(this, "onInternetError", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onItemClicked(User user)
+    {
+        Toast.makeText(this, user.getName(), Toast.LENGTH_SHORT).show();
     }
 }

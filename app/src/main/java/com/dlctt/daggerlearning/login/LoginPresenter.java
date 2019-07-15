@@ -1,7 +1,5 @@
 package com.dlctt.daggerlearning.login;
 
-import android.util.Log;
-
 import com.dlctt.daggerlearning.di.ActivityScoped;
 import com.dlctt.daggerlearning.model.pojo.User;
 import com.dlctt.daggerlearning.model.remote.LoginRepository;
@@ -9,16 +7,12 @@ import com.dlctt.daggerlearning.model.remote.LoginRepository;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Function;
 import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
 
