@@ -2,6 +2,7 @@ package com.dlctt.daggerlearning.login;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -19,6 +20,7 @@ import com.dlctt.daggerlearning.utils.ListItemCallback;
 import com.dlctt.daggerlearning.utils.UsersDiffCallback;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.inject.Inject;
 
@@ -35,6 +37,7 @@ public class LoginActivity extends DaggerAppCompatActivity implements LoginContr
     private ProgressBar loadingIndicator;
     private RecyclerView usersList;
     private UsersAdapter usersAdapter;
+    boolean first = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -45,6 +48,20 @@ public class LoginActivity extends DaggerAppCompatActivity implements LoginContr
         initView();
         prepViews();
         presenter.loadUsers();
+
+        Runnable runnable = new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                presenter.loadUsers();
+            }
+        };
+
+        new Handler().postDelayed(runnable, 5000);
+        new Handler().postDelayed(runnable, 10000);
+        new Handler().postDelayed(runnable, 15000);
+        new Handler().postDelayed(runnable, 20000);
     }
 
     private void initView()
@@ -79,7 +96,24 @@ public class LoginActivity extends DaggerAppCompatActivity implements LoginContr
     @Override
     public void onUsersLoaded(ArrayList<User> users)
     {
-        usersAdapter.submitList(users);
+        if (!first)
+        {
+            int random = new Random(System.currentTimeMillis()).nextInt();
+            User user = new User();
+            User user1 = new User();
+            User user2 = new User();
+            user.setId(random);
+            user1.setId(random + 1);
+            user2.setId(random + 2);
+
+            users.clear();
+            users.add(user);
+            users.add(user1);
+            users.add(user2);
+        }
+
+        usersAdapter.addMoreUsers(users);
+        first = false;
     }
 
     @Override
